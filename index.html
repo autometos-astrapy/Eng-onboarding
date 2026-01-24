@@ -10,7 +10,7 @@
     <link href="https://fonts.googleapis.com/css2?family=ZCOOL+XiaoWei&family=Cairo:wght@400;600;700&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet">
 
     <style>
-        /* --- Add Scrollbar --- */
+        /* --- Scrollbar --- */
         ::-webkit-scrollbar {
             width: 10px;
         }
@@ -20,7 +20,6 @@
             border-radius: 5px;
         }
         
-        /* Making the bar on the left requires adjusting HTML as we did below */
         ::-webkit-scrollbar-thumb {
             background: linear-gradient(to bottom, #b88a00, #8a6d3b);
             border-radius: 5px;
@@ -31,7 +30,6 @@
             background: linear-gradient(to bottom, #d4a000, #a68b44);
         }
         
-        /* For other browsers */
         * {
             scrollbar-width: thin;
             scrollbar-color: #b88a00 rgba(0, 0, 0, 0.2);
@@ -49,10 +47,9 @@
 
         * { box-sizing: border-box; outline: none; }
 
-        /* Fix here: Scrolling is at HTML level to make the bar appear on the correct side for the language (left) */
         html {
             height: 100%;
-            overflow-y: auto; /* This forces the bar to be on the correct side for the language (left) */
+            overflow-y: auto;
         }
 
         body {
@@ -65,7 +62,6 @@
             background-color: var(--bg-deep);
             position: relative;
             padding: 20px;
-            /* Removed overflow-y from here */
         }
 
         /* =========================================
@@ -109,7 +105,7 @@
         }
 
         /* =========================================
-           2. Weather Elements
+           2. Weather Effects
            ========================================= */
         .rain-container {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
@@ -191,11 +187,11 @@
             padding-bottom: 4px;
         }
 
-        /* Fields and buttons */
+        /* Fields and Buttons */
         .input-group { margin-bottom: 16px; position: relative; }
         .input-group label { display: block; margin-bottom: 5px; font-size: 12px; color: #999; font-weight: 600; }
         
-        /* INPUT styling */
+        /* INPUT Styling */
         input, select {
             width: 100%; padding: 13px 15px;
             background: rgba(255, 255, 255, 0.02); 
@@ -212,21 +208,20 @@
             box-shadow: 0 0 20px rgba(255, 215, 0, 0.1);
         }
 
-        /* --- Custom Select styling --- */
+        /* --- Custom Select Styling --- */
         select {
-            appearance: none; /* Hide default arrow */
+            appearance: none;
             -webkit-appearance: none;
             cursor: pointer;
         }
         
-        /* Change background color for options */
         select option {
             background: #111;
             color: #fff;
             padding: 10px;
         }
 
-        /* Custom select arrow */
+        /* Select Arrow */
         .select-arrow {
             position: absolute;
             right: 15px; /* LTR */
@@ -238,12 +233,11 @@
             transition: transform 0.3s;
         }
 
-        /* Rotate arrow on focus */
         .input-wrapper:focus-within .select-arrow {
             transform: translateY(-50%) rotate(180deg);
         }
 
-        /* --- Security icons --- */
+        /* --- Security Icons --- */
         .secure-icon { 
             position: absolute; right: 15px; top: 50%; transform: translateY(-50%); 
             color: #555; font-size: 12px; pointer-events: none;
@@ -319,7 +313,7 @@
         <form id="astrapyForm">
             <div class="input-group">
                 <label>Full Name</label>
-                <input type="text" id="fullName" placeholder="Example: Ahmed Mohamed" required>
+                <input type="text" id="fullName" placeholder="Example: John Smith" required>
             </div>
 
             <div class="input-group">
@@ -350,7 +344,7 @@
             </div>
 
             <div class="input-group">
-                <label>Phone Number <span style="font-size:10px; opacity:0.5;">(optional)</span></label>
+                <label>Phone Number <span style="font-size:10px; opacity:0.5;">(Optional)</span></label>
                 <input type="tel" id="phone" class="ltr-input" placeholder="+1 1234567890">
             </div>
 
@@ -369,7 +363,7 @@
                         <option value="IT">🇮🇹 Italy</option>
                         
                         <option value="JO">🇯🇴 Jordan</option>
-                        <option value="AE">🇦🇪 United Arab Emirates</option>
+                        <option value="AE">🇦🇪 UAE</option>
                         <option value="BH">🇧🇭 Bahrain</option>
                         <option value="BR">🇧🇷 Brazil</option>
                         <option value="PT">🇵🇹 Portugal</option>
@@ -388,7 +382,7 @@
                         <option value="NO">🇳🇴 Norway</option>
                         <option value="AT">🇦🇹 Austria</option>
                         <option value="IN">🇮🇳 India</option>
-                        <option value="US">🇺🇸 United States</option>
+                        <option value="US">🇺🇸 USA</option>
                         <option value="JP">🇯🇵 Japan</option>
                         <option value="YE">🇾🇪 Yemen</option>
                         
@@ -484,7 +478,65 @@
         // --- 1. Connection Settings ---
         const N8N_WEBHOOK_URL = 'https://testforli.app.n8n.cloud/webhook/16b53ae1-b8b6-4cf4-9863-2b4b6a4c462f'; 
 
-        // --- 2. Rain Settings ---
+        // --- 2. Country Names Dictionary ---
+        const countryMap = {
+            "AU": "Australia",
+            "DE": "Germany",
+            "IE": "Ireland",
+            "ES": "Spain",
+            "ID": "Indonesia",
+            "IT": "Italy",
+            "JO": "Jordan",
+            "AE": "UAE",
+            "BH": "Bahrain",
+            "BR": "Brazil",
+            "PT": "Portugal",
+            "DZ": "Algeria",
+            "DK": "Denmark",
+            "SA": "Saudi Arabia",
+            "SD": "Sudan",
+            "SE": "Sweden",
+            "SO": "Somalia",
+            "CN": "China",
+            "IQ": "Iraq",
+            "KW": "Kuwait",
+            "MA": "Morocco",
+            "MX": "Mexico",
+            "UK": "United Kingdom",
+            "NO": "Norway",
+            "AT": "Austria",
+            "IN": "India",
+            "US": "USA",
+            "JP": "Japan",
+            "YE": "Yemen",
+            "PK": "Pakistan",
+            "BE": "Belgium",
+            "PL": "Poland",
+            "TR": "Turkey",
+            "TN": "Tunisia",
+            "KM": "Comoros",
+            "ZA": "South Africa",
+            "DJ": "Djibouti",
+            "RU": "Russia",
+            "SG": "Singapore",
+            "SY": "Syria",
+            "CH": "Switzerland",
+            "OM": "Oman",
+            "FR": "France",
+            "PS": "Palestine",
+            "QA": "Qatar",
+            "CA": "Canada",
+            "KR": "South Korea",
+            "LB": "Lebanon",
+            "LY": "Libya",
+            "MY": "Malaysia",
+            "EG": "Egypt",
+            "MR": "Mauritania",
+            "NZ": "New Zealand",
+            "NL": "Netherlands"
+        };
+
+        // --- 3. Rain Settings ---
         const rainContainer = document.getElementById('rain');
         function createRain() {
             for(let i=0; i<60; i++) { 
@@ -499,7 +551,7 @@
         }
         createRain();
 
-        // --- 3. Lightning Engine ---
+        // --- 4. Lightning Engine ---
         const svgCanvas = document.getElementById('lightning-canvas');
         const skyFlash = document.getElementById('sky-flash');
         const inputs = document.querySelectorAll('input, select'); 
@@ -548,7 +600,7 @@
             });
         });
 
-        // --- 4. Actual Submission ---
+        // --- 5. Actual Submission ---
         const form = document.getElementById('astrapyForm');
         
         form.addEventListener('submit', async (e) => {
@@ -561,6 +613,10 @@
             btn.style.opacity = "0.7";
             btn.style.cursor = "wait";
 
+            const countryCode = document.getElementById('country').value;
+            const countryName = countryMap[countryCode] || countryCode;
+            const countryOutput = `${countryName}, ${countryCode}`;
+
             const formData = {
                 full_name: document.getElementById('fullName').value,
                 store_name: document.getElementById('storeName').value,
@@ -568,7 +624,7 @@
                 store_type: document.getElementById('storeType').value,
                 email: document.getElementById('email').value,
                 phone: document.getElementById('phone').value,
-                country: document.getElementById('country').value,
+                country: countryOutput,
                 service_type: document.getElementById('serviceType').value,
                 consumer_key: document.getElementById('consumerKey').value,
                 consumer_secret: document.getElementById('consumerSecret').value,
